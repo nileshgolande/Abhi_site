@@ -1,0 +1,472 @@
+import { useEffect, useState } from 'react'
+import {
+  Award,
+  Menu,
+  Phone,
+  Shield,
+  Truck,
+  X,
+  MessageCircle,
+  MapPin,
+} from 'lucide-react'
+
+const PHONE_PRIMARY = '7264949004'
+const PHONE_SECONDARY = '8380035106'
+const GST = '27CDYPJ0404Q1ZX'
+
+function asset(path: string) {
+  return `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
+}
+
+export default function App() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen])
+
+  const waHref = `https://wa.me/91${PHONE_PRIMARY}?text=${encodeURIComponent(
+    'नमस्कार, पांडुरंग स्टिल चैनलिंक (जाळी) इंडस्ट्रीज — चैनलिंक जाळी / काटेरी तार बद्दल चौकशी आहे.',
+  )}`
+
+  const nav = [
+    { href: '#hero', label: 'मुख्य' },
+    { href: '#products', label: 'उत्पादने' },
+    { href: '#brands', label: 'भागीदार' },
+    { href: '#contact', label: 'संपर्क' },
+  ]
+
+  return (
+    <div className="min-h-svh bg-white text-ink font-marathi">
+      <a
+        href="#main"
+        className="absolute left-[-9999px] top-0 z-[100] whitespace-nowrap rounded-lg bg-brand px-4 py-2 text-white focus:left-4 focus:top-4"
+      >
+        मुख्य सामग्रीवर जा
+      </a>
+
+      <header className="sticky top-0 z-50 border-b border-black/5 bg-white/95 backdrop-blur-md">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+          <a href="#" className="group min-w-0 text-left">
+            <p className="text-[0.65rem] font-medium tracking-wide text-amber-700 sm:text-xs">
+              !! गजानन महाराज प्रसन्न !!
+            </p>
+            <p className="truncate text-lg font-semibold leading-tight text-brand transition-colors group-hover:text-brand-dark sm:text-xl">
+              पांडुरंग स्टिल चैनलिंक (जाळी) इंडस्ट्रीज
+            </p>
+          </a>
+
+          <nav className="hidden items-center gap-6 md:flex" aria-label="मुख्य नेव्हिगेशन">
+            {nav.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-sm font-medium text-ink/80 transition hover:text-brand"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="hidden shrink-0 items-center gap-3 lg:flex">
+            <a
+              href={`tel:+91${PHONE_PRIMARY}`}
+              className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-ink shadow-sm transition hover:border-brand/30 hover:text-brand"
+            >
+              <Phone className="size-4 text-brand" aria-hidden />
+              {PHONE_PRIMARY}
+            </a>
+          </div>
+
+          <button
+            type="button"
+            className="inline-flex rounded-xl border border-black/10 p-2 text-ink md:hidden"
+            onClick={() => setMenuOpen(true)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label="मेनू उघडा"
+          >
+            <Menu className="size-6" />
+          </button>
+        </div>
+
+        {menuOpen ? (
+          <div
+            id="mobile-menu"
+            className="fixed inset-0 z-[60] bg-white md:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="मोबाइल मेनू"
+          >
+            <div className="flex items-center justify-between border-b border-black/5 px-4 py-3">
+              <span className="font-semibold text-brand">मेनू</span>
+              <button
+                type="button"
+                className="rounded-xl border border-black/10 p-2"
+                onClick={() => setMenuOpen(false)}
+                aria-label="मेनू बंद करा"
+              >
+                <X className="size-6" />
+              </button>
+            </div>
+            <nav className="flex flex-col gap-1 p-4" aria-label="मोबाइल नेव्हिगेशन">
+              {nav.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-xl px-4 py-3 text-lg font-medium text-ink hover:bg-black/[0.03]"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ))}
+              <a
+                href={`tel:+91${PHONE_PRIMARY}`}
+                className="mt-4 inline-flex items-center justify-center gap-2 rounded-2xl bg-brand px-4 py-4 text-lg font-semibold text-white"
+                onClick={() => setMenuOpen(false)}
+              >
+                <Phone className="size-5" aria-hidden />
+                आता कॉल करा
+              </a>
+            </nav>
+          </div>
+        ) : null}
+      </header>
+
+      <main id="main">
+        <section
+          id="hero"
+          className="relative overflow-hidden border-b border-black/5"
+        >
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.07]"
+            style={{
+              backgroundImage: `url(${asset('assets/reference-flyer.png')})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+            aria-hidden
+          />
+          <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:py-24">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+              <div className="max-w-3xl space-y-6">
+                <span className="inline-flex items-center rounded-full bg-brand px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
+                  होलसेल
+                </span>
+                <h1 className="text-balance text-3xl font-semibold leading-tight text-brand sm:text-4xl lg:text-5xl">
+                  पांडुरंग स्टिल चैनलिंक (जाळी) इंडस्ट्रीज
+                </h1>
+                <p className="text-pretty text-lg leading-relaxed text-muted sm:text-xl">
+                  आमचे कडे सर्व प्रकारच्या कम्पाउंड साठी, शेतीसाठी, पोल्ट्री फार्म, कांदा चाळ,
+                  शेळीपालन, शेततळे, द्राक्षबाग, प्लॉट साठी लागणारी जाळी काटेरी तार होलसेल दरात
+                  मिळेल.
+                </p>
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                  <a
+                    href={`tel:+91${PHONE_PRIMARY}`}
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand px-6 py-4 text-base font-semibold text-white shadow-lg shadow-brand/25 transition hover:bg-brand-dark"
+                  >
+                    <Phone className="size-5 shrink-0" aria-hidden />
+                    आता कॉल करा — {PHONE_PRIMARY}
+                  </a>
+                  <a
+                    href={waHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-emerald-600/20 bg-emerald-50 px-6 py-4 text-base font-semibold text-emerald-900 transition hover:border-emerald-600/40"
+                  >
+                    <MessageCircle className="size-5 shrink-0" aria-hidden />
+                    WhatsApp वर चौकशी
+                  </a>
+                </div>
+                <dl className="grid gap-4 border-t border-black/10 pt-6 sm:grid-cols-3">
+                  <div className="flex gap-3">
+                    <Truck className="mt-0.5 size-5 shrink-0 text-brand" aria-hidden />
+                    <div>
+                      <dt className="text-xs font-semibold uppercase tracking-wide text-muted">
+                        वितरण
+                      </dt>
+                      <dd className="text-sm font-medium">त्वरित पुरवठा व सेवा</dd>
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <Shield className="mt-0.5 size-5 shrink-0 text-brand" aria-hidden />
+                    <div>
+                      <dt className="text-xs font-semibold uppercase tracking-wide text-muted">
+                        दर्जा
+                      </dt>
+                      <dd className="text-sm font-medium">उच्च दर्जाची स्टील जाळी व तार</dd>
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <Award className="mt-0.5 size-5 shrink-0 text-brand" aria-hidden />
+                    <div>
+                      <dt className="text-xs font-semibold uppercase tracking-wide text-muted">
+                        दर
+                      </dt>
+                      <dd className="text-sm font-medium">होलसेल दर — विश्वासार्ह</dd>
+                    </div>
+                  </div>
+                </dl>
+              </div>
+
+              <div className="relative mx-auto w-full max-w-md lg:mx-0">
+                <div className="aspect-[4/5] overflow-hidden rounded-3xl border border-black/10 bg-zinc-100 shadow-2xl shadow-black/10">
+                  <img
+                    src={asset('assets/chainlink-rolls.png')}
+                    alt="उच्च दर्जाची साखळी जाळीचे रोल — पांडुरंग स्टिल चैनलिंक इंडस्ट्रीज"
+                    className="h-full w-full object-cover"
+                    width={800}
+                    height={1000}
+                    loading="eager"
+                    fetchPriority="high"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -left-4 hidden rounded-2xl border border-black/10 bg-white p-4 text-sm shadow-lg sm:block">
+                  <p className="font-semibold text-brand">GST</p>
+                  <p className="font-mono text-xs text-muted">{GST}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="strip" className="border-b border-black/5 bg-zinc-50">
+          <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:px-6">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+              <a
+                href={`tel:+91${PHONE_PRIMARY}`}
+                className="inline-flex items-center gap-2 font-semibold text-ink hover:text-brand"
+              >
+                <Phone className="size-4 text-brand" aria-hidden />
+                {PHONE_PRIMARY}
+              </a>
+              <a
+                href={`tel:+91${PHONE_SECONDARY}`}
+                className="inline-flex items-center gap-2 font-semibold text-ink hover:text-brand"
+              >
+                <Phone className="size-4 text-brand" aria-hidden />
+                {PHONE_SECONDARY}
+              </a>
+            </div>
+            <p className="text-sm text-muted">
+              <span className="font-semibold text-ink">GST:</span>{' '}
+              <span className="font-mono">{GST}</span>
+            </p>
+          </div>
+        </section>
+
+        <section id="products" className="scroll-mt-24 py-16 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="mx-auto max-w-3xl text-center">
+              <h2 className="text-3xl font-semibold text-brand sm:text-4xl">उत्पादने</h2>
+              <p className="mt-3 text-pretty text-muted sm:text-lg">
+                चैनलिंक जाळी व काटेरी तार — तुमच्या गरजेनुसार मोजमाप व जाडी. खालील गॅलरीत आमच्या
+                प्रॉडक्टचे फोटो पहा.
+              </p>
+            </div>
+
+            <div className="mt-12 space-y-16">
+              <div>
+                <h3 className="text-center text-xl font-semibold text-ink sm:text-2xl">
+                  चैनलिंक जाळी (साखळी जाळी)
+                </h3>
+                <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-muted">
+                  कम्पाउंड, शेती, प्लॉट, फार्म व इतर ठिकाणी बांधकामासाठी तयार स्टॉक.
+                </p>
+                <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {[
+                    {
+                      src: 'assets/chainlink-rolls.png',
+                      alt: 'चैनलिंक जाळीचे मोठे रोल — गॅल्वनाइज्ड स्टील',
+                    },
+                    {
+                      src: 'assets/chainlink-texture.png',
+                      alt: 'उच्च दर्जाची साखळी जाळी — जवळून दिसणारा डायमंड पॅटर्न',
+                    },
+                    {
+                      src: 'assets/chainlink-roll-studio.png',
+                      alt: 'चैनलिंक जाळीचा रोल — स्वच्छ पार्श्वभूमीवर प्रॉडक्ट फोटो',
+                    },
+                    {
+                      src: 'assets/chainlink-installed.png',
+                      alt: 'प्रोफेशनलपणे बसवलेली चैनलिंक जाळी — शेत व प्लॉटसाठी',
+                    },
+                  ].map((item) => (
+                    <figure
+                      key={item.src}
+                      className="group overflow-hidden rounded-2xl border border-black/10 bg-zinc-100 shadow-sm"
+                    >
+                      <img
+                        src={asset(item.src)}
+                        alt={item.alt}
+                        className="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                        width={600}
+                        height={600}
+                        loading="lazy"
+                      />
+                    </figure>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-center text-xl font-semibold text-ink sm:text-2xl">
+                  काटेरी तार (बार्ब्ड वायर)
+                </h3>
+                <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-muted">
+                  सुरक्षा व मजबूतीसाठी — गॅल्वनाइज्ड काटेरी तार होलसेल दरात उपलब्ध.
+                </p>
+                <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                  <figure className="group overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
+                    <img
+                      src={asset('assets/barbed-wire-coil.png')}
+                      alt="पांडुरंग स्टिलची उच्च दर्जाची काटेरी तार (बार्ब्ड वायर) — शेती आणि सुरक्षिततेसाठी."
+                      className="aspect-[4/3] w-full object-contain object-center p-4 transition duration-500 group-hover:scale-[1.02]"
+                      width={800}
+                      height={600}
+                      loading="lazy"
+                    />
+                    <figcaption className="border-t border-black/5 px-4 py-3 text-center text-xs text-muted">
+                      गॅल्वनाइज्ड काटेरी तार — रोल
+                    </figcaption>
+                  </figure>
+                  <figure className="group overflow-hidden rounded-2xl border border-black/10 bg-zinc-100 shadow-sm">
+                    <img
+                      src={asset('assets/barbed-wire-stock.png')}
+                      alt="आमच्याकडे उपलब्ध असलेली उच्च दर्जाची गॅल्व्हनाइज्ड काटेरी तार — तयार स्टॉक."
+                      className="aspect-[4/3] w-full object-cover object-center transition duration-500 group-hover:scale-[1.03]"
+                      width={800}
+                      height={600}
+                      loading="lazy"
+                    />
+                    <figcaption className="border-t border-black/5 bg-white px-4 py-3 text-center text-xs text-muted">
+                      मोठ्या प्रमाणात स्टॉक — त्वरित पुरवठा
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="brands" className="scroll-mt-24 border-y border-black/5 bg-zinc-50 py-16 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="mx-auto max-w-3xl text-center">
+              <h2 className="text-3xl font-semibold text-brand sm:text-4xl">आमचे विश्वासू ब्रँड</h2>
+              <p className="mt-3 text-pretty text-muted sm:text-lg">
+                आम्ही दर्जेदार साहित्यासाठी नामांकित उत्पादकांसोबत काम करतो.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-4 sm:grid-cols-3">
+              <div className="flex min-h-[140px] flex-col items-center justify-center rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+                <div className="text-3xl font-black tracking-tight text-[#1e4d8b]">TATA</div>
+                <p className="mt-2 text-center text-xs text-muted">स्टील व साहित्य — टाटा</p>
+              </div>
+              <div className="flex min-h-[140px] flex-col items-center justify-center rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+                <div className="flex items-center gap-1 text-2xl font-black tracking-tight text-zinc-900">
+                  <span className="text-brand">+</span>
+                  ESSAR
+                </div>
+                <p className="mt-2 text-center text-xs text-muted">ESSAR स्टील परिवार</p>
+              </div>
+              <div className="flex min-h-[140px] flex-col items-center justify-center rounded-2xl border border-black/10 bg-gradient-to-br from-zinc-800 to-zinc-950 p-6 text-white shadow-sm">
+                <div className="text-center text-lg font-bold leading-tight">
+                  SteelWork
+                  <span className="block text-xs font-medium text-zinc-300">Fabrication</span>
+                </div>
+                <p className="mt-3 text-center text-xs text-zinc-400">फॅब्रिकेशन व स्टील वर्क</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="contact"
+          className="scroll-mt-24 bg-gradient-to-b from-brand to-brand-dark py-16 text-white sm:py-20"
+        >
+          <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
+            <h2 className="text-3xl font-semibold sm:text-4xl">तुमच्या प्रकल्पासाठी तातडीने सेवा</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-pretty text-white/90 sm:text-lg">
+              मोजमाप, दर आणि उपलब्धता जाणून घेण्यासाठी आम्हाला फोन करा किंवा WhatsApp करा.
+            </p>
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <a
+                href={`tel:+91${PHONE_PRIMARY}`}
+                className="inline-flex w-full max-w-sm items-center justify-center gap-2 rounded-2xl bg-white px-8 py-4 text-lg font-bold text-brand shadow-xl transition hover:bg-zinc-100 sm:w-auto"
+              >
+                <Phone className="size-5" aria-hidden />
+                आता कॉल करा
+              </a>
+              <a
+                href={waHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full max-w-sm items-center justify-center gap-2 rounded-2xl border-2 border-white/40 bg-white/10 px-8 py-4 text-lg font-semibold backdrop-blur transition hover:bg-white/15 sm:w-auto"
+              >
+                <MessageCircle className="size-5" aria-hidden />
+                WhatsApp
+              </a>
+            </div>
+            <p className="mt-6 text-sm text-white/80">
+              {PHONE_PRIMARY} · {PHONE_SECONDARY}
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-black/10 bg-zinc-950 py-12 text-zinc-200">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+            <div>
+              <p className="text-lg font-semibold text-white">पांडुरंग स्टिल चैनलिंक (जाळी) इंडस्ट्रीज</p>
+              <p className="mt-2 text-sm text-zinc-400">
+              (प्रो. प्रा.): <span className="text-zinc-200">आभी जाधव पाटील</span>
+                <span className="mt-1 block text-xs text-zinc-500"></span>
+              </p>
+              <p className="mt-4 inline-flex items-start gap-2 text-sm text-zinc-400">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
+                <span>
+                  पत्ता: सागर पेट्रोलपंप समोर, चिखली-जालना रोड, देऊळगाव मही
+                </span>
+              </p>
+            </div>
+            <div className="text-sm">
+              <p className="font-semibold text-white">संपर्क</p>
+              <ul className="mt-3 space-y-2">
+                <li>
+                  <a href={`tel:+91${PHONE_PRIMARY}`} className="hover:text-white">
+                    {PHONE_PRIMARY}
+                  </a>
+                </li>
+                <li>
+                  <a href={`tel:+91${PHONE_SECONDARY}`} className="hover:text-white">
+                    {PHONE_SECONDARY}
+                  </a>
+                </li>
+                <li className="font-mono text-xs text-zinc-500">GST: {GST}</li>
+              </ul>
+            </div>
+          </div>
+          <p className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-zinc-500">
+            © {new Date().getFullYear()} पांडुरंग स्टिल चैनलिंक (जाळी) इंडस्ट्रीज. सर्व हक्क राखीव.
+          </p>
+        </div>
+      </footer>
+
+      <a
+        href={waHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-5 right-5 z-[70] flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-emerald-900/30 transition hover:scale-105 hover:shadow-xl"
+        aria-label="WhatsApp वर संदेश पाठवा"
+      >
+        <MessageCircle className="size-7" aria-hidden />
+      </a>
+    </div>
+  )
+}
