@@ -46,16 +46,15 @@ const CHAINLINK_GALLERY = [
   },
 ] as const
 
-const CHAINLINK_IMAGES = [
-  IMG_CHAINLINK_ROLLS,
-  IMG_CHAINLINK_MESH_A,
-  IMG_CHAINLINK_MESH_B,
-] as const
+function asset(path: string) {
+  return `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
+}
+
+/** Hero: दुकान व मुख्य फलक — स्थानिक फोटो */
+const HERO_STOREFRONT = asset('assets/hero-storefront.png')
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [heroImgIndex, setHeroImgIndex] = useState(0)
-  const heroImgSrc = CHAINLINK_IMAGES[heroImgIndex] ?? CHAINLINK_IMAGES[0]
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
@@ -178,11 +177,11 @@ export default function App() {
           className="relative overflow-hidden border-b border-black/5"
         >
           <div
-            className="pointer-events-none absolute inset-0 opacity-[0.06]"
+            className="pointer-events-none absolute inset-0 opacity-[0.05]"
             style={{
-              backgroundImage: `url(${IMG_CHAINLINK_MESH_A})`,
+              backgroundImage: `url(${HERO_STOREFRONT})`,
               backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundPosition: 'center top',
             }}
             aria-hidden
           />
@@ -250,33 +249,27 @@ export default function App() {
               </div>
 
               <div className="relative mx-auto w-full max-w-md lg:mx-0">
-                <div className="aspect-[4/5] overflow-hidden rounded-3xl border border-black/10 bg-zinc-900 shadow-2xl shadow-black/20 ring-1 ring-black/10">
+                <div className="aspect-[3/4] overflow-hidden rounded-3xl border border-black/10 bg-zinc-100 shadow-2xl shadow-black/20 ring-1 ring-black/10 sm:aspect-[4/5]">
                   <img
-                    src={heroImgSrc}
-                    onError={() =>
-                      setHeroImgIndex((i) =>
-                        i < CHAINLINK_IMAGES.length - 1 ? i + 1 : i,
-                      )
-                    }
-                    alt="उच्च दर्जाची चैनलिंक जाळी — पांडुरंग स्टिल चैनलिंक इंडस्ट्रीज"
-                    className="h-full w-full object-cover"
+                    src={HERO_STOREFRONT}
+                    alt="पांडुरंग स्टिल चैनलिंक इंडस्ट्रीज — दुकान व मुख्य फलक, जाळी व संपर्क माहिती"
+                    className="h-full w-full object-cover object-center"
                     width={1200}
-                    height={1500}
+                    height={1600}
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
-                    referrerPolicy="no-referrer"
                   />
                 </div>
                 <div className="mt-3 flex flex-col items-center gap-2 sm:items-end">
                   <a
-                    href={heroImgSrc}
+                    href={HERO_STOREFRONT}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-1.5 text-xs font-medium text-brand hover:text-brand-dark"
                   >
                     <ExternalLink className="size-3.5 shrink-0" aria-hidden />
-                    ही प्रतिमा नवीन टॅबमध्ये उघडा
+                    फलक फोटो नवीन टॅबमध्ये उघडा
                   </a>
                   <a
                     href={URL_ORCHARD_CHAINLINK_ROLLS}
