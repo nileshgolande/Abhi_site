@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import {
   Award,
+  ExternalLink,
   Menu,
   Phone,
   Shield,
@@ -14,12 +15,45 @@ const PHONE_PRIMARY = '7264949004'
 const PHONE_SECONDARY = '8380035106'
 const GST = '27CDYPJ0404Q1ZX'
 
+/** Pexels CDN — HD JPEG (free use). w = max width, q = quality. */
+function pexelsHd(photoId: string, w: number) {
+  return `https://images.pexels.com/photos/${photoId}/pexels-photo-${photoId}.jpeg?auto=compress&cs=tinysrgb&w=${w}&q=90`
+}
+
+/** Curated chain-link / cyclone fence stock for crisp demos (not a substitute for your product shots). */
+const CHAINLINK_HD_GALLERY = [
+  {
+    id: '683402',
+    alt: 'चैनलिंक जाळी — जवळून, दिवसाच्या प्रकाशात',
+    caption: 'चैनलिंक जाळी — जवळून',
+    page: 'https://www.pexels.com/photo/chain-linked-fence-683402/',
+    credit: 'Min An / Pexels',
+  },
+  {
+    id: '951408',
+    alt: 'सायक्लोन जाळी — उथळ डोफसह छायाचित्र',
+    caption: 'सायक्लोन / चैनलिंक जाळी',
+    page: 'https://www.pexels.com/photo/cyclone-fence-in-shallow-photography-951408/',
+    credit: 'Travis Saylor / Pexels',
+  },
+  {
+    id: '1550131',
+    alt: 'चैनलिंक जाळीवर पान — वायर मेशचा टेक्सचर',
+    caption: 'जाळी व वायर मेश',
+    page: 'https://www.pexels.com/photo/orange-leaf-on-chainlink-fence-1550131/',
+    credit: 'Brett Sayles / Pexels',
+  },
+] as const
+
+const HERO_CHAINLINK_HD = pexelsHd('951408', 2560)
+
 function asset(path: string) {
   return `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
 }
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [heroImgSrc, setHeroImgSrc] = useState(HERO_CHAINLINK_HD)
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
@@ -214,17 +248,34 @@ export default function App() {
               </div>
 
               <div className="relative mx-auto w-full max-w-md lg:mx-0">
-                <div className="aspect-[4/5] overflow-hidden rounded-3xl border border-black/10 bg-zinc-100 shadow-2xl shadow-black/10">
+                <div className="aspect-[4/5] overflow-hidden rounded-3xl border border-black/10 bg-zinc-900 shadow-2xl shadow-black/20 ring-1 ring-black/10">
                   <img
-                    src={asset('assets/chainlink-rolls.png')}
-                    alt="उच्च दर्जाची साखळी जाळीचे रोल — पांडुरंग स्टिल चैनलिंक इंडस्ट्रीज"
+                    src={heroImgSrc}
+                    srcSet={
+                      heroImgSrc === HERO_CHAINLINK_HD
+                        ? `${pexelsHd('951408', 960)} 960w, ${pexelsHd('951408', 1440)} 1440w, ${pexelsHd('951408', 1920)} 1920w, ${pexelsHd('951408', 2560)} 2560w`
+                        : undefined
+                    }
+                    sizes="(max-width: 1024px) 100vw, 28rem"
+                    onError={() => setHeroImgSrc(asset('assets/chainlink-rolls.png'))}
+                    alt="उच्च दर्जाची चैनलिंक जाळी — पांडुरंग स्टिल चैनलिंक इंडस्ट्रीज"
                     className="h-full w-full object-cover"
-                    width={800}
-                    height={1000}
+                    width={1280}
+                    height={1600}
                     loading="eager"
                     fetchPriority="high"
+                    decoding="async"
                   />
                 </div>
+                <a
+                  href={HERO_CHAINLINK_HD}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 flex items-center justify-center gap-1.5 text-center text-xs font-medium text-brand hover:text-brand-dark sm:justify-end"
+                >
+                  <ExternalLink className="size-3.5 shrink-0" aria-hidden />
+                  हा फोटो HD मध्ये उघडा (Pexels)
+                </a>
                 <div className="absolute -bottom-4 -left-4 hidden rounded-2xl border border-black/10 bg-white p-4 text-sm shadow-lg sm:block">
                   <p className="font-semibold text-brand">GST</p>
                   <p className="font-mono text-xs text-muted">{GST}</p>
@@ -264,12 +315,12 @@ export default function App() {
             <div className="mx-auto max-w-3xl text-center">
               <h2 className="text-3xl font-semibold text-brand sm:text-4xl">उत्पादने</h2>
               <p className="mt-3 text-pretty text-muted sm:text-lg">
-                चैनलिंक जाळी व काटेरी तार — तुमच्या गरजेनुसार मोजमाप व जाडी. खालील गॅलरीत आमच्या
-                प्रॉडक्टचे फोटो पहा.
+                चैनलिंक जाळी व काटेरी तार — तुमच्या गरजेनुसार मोजमाप व जाडी. खाली HD प्रात्यक्षिक
+                दृश्ये (लिंकसह) आणि आमच्या स्टॉकचे वास्तविक फोटो पहा.
               </p>
             </div>
 
-            <div className="mt-12 space-y-16">
+            <div className="mt-12 space-y-20">
               <div>
                 <h3 className="text-center text-xl font-semibold text-ink sm:text-2xl">
                   चैनलिंक जाळी (साखळी जाळी)
@@ -277,7 +328,64 @@ export default function App() {
                 <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-muted">
                   कम्पाउंड, शेती, प्लॉट, फार्म व इतर ठिकाणी बांधकामासाठी तयार स्टॉक.
                 </p>
-                <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+
+                <p className="mx-auto mt-8 max-w-2xl text-center text-xs font-semibold uppercase tracking-wider text-brand">
+                  HD प्रात्यक्षिक (मोठ्या आकारात उघडण्यासाठी लिंक)
+                </p>
+                <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {CHAINLINK_HD_GALLERY.map((item) => {
+                    const hdFull = pexelsHd(item.id, 4096)
+                    const srcSet = `${pexelsHd(item.id, 960)} 960w, ${pexelsHd(item.id, 1280)} 1280w, ${pexelsHd(item.id, 1920)} 1920w, ${pexelsHd(item.id, 2560)} 2560w`
+                    return (
+                      <figure
+                        key={item.id}
+                        className="group relative overflow-hidden rounded-2xl border border-black/10 bg-zinc-900 shadow-lg ring-1 ring-black/5"
+                      >
+                        <img
+                          src={pexelsHd(item.id, 1920)}
+                          srcSet={srcSet}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          alt={item.alt}
+                          className="aspect-[4/5] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
+                          width={1920}
+                          height={2400}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-95 transition group-hover:opacity-100" />
+                        <figcaption className="absolute inset-x-0 bottom-0 z-[1] space-y-3 p-4 pt-12 text-white">
+                          <p className="text-sm font-semibold leading-snug">{item.caption}</p>
+                          <p className="text-[0.65rem] text-white/75">{item.credit}</p>
+                          <div className="pointer-events-auto flex flex-wrap gap-2">
+                            <a
+                              href={hdFull}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-2 text-xs font-bold text-brand shadow-md transition hover:bg-zinc-100"
+                            >
+                              <ExternalLink className="size-3.5 shrink-0" aria-hidden />
+                              HD फोटो उघडा
+                            </a>
+                            <a
+                              href={item.page}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 rounded-lg border border-white/40 bg-white/10 px-3 py-2 text-xs font-semibold backdrop-blur transition hover:bg-white/20"
+                            >
+                              स्रोत
+                              <ExternalLink className="size-3 shrink-0 opacity-80" aria-hidden />
+                            </a>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    )
+                  })}
+                </div>
+
+                <p className="mx-auto mt-14 max-w-2xl text-center text-xs font-semibold uppercase tracking-wider text-brand">
+                  आमचा स्टॉक — वास्तविक उत्पादन फोटो
+                </p>
+                <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   {[
                     {
                       src: 'assets/chainlink-rolls.png',
@@ -298,16 +406,19 @@ export default function App() {
                   ].map((item) => (
                     <figure
                       key={item.src}
-                      className="group overflow-hidden rounded-2xl border border-black/10 bg-zinc-100 shadow-sm"
+                      className="group overflow-hidden rounded-2xl border border-black/10 bg-zinc-100 shadow-md ring-1 ring-black/[0.04] transition hover:-translate-y-0.5 hover:shadow-xl"
                     >
-                      <img
-                        src={asset(item.src)}
-                        alt={item.alt}
-                        className="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-                        width={600}
-                        height={600}
-                        loading="lazy"
-                      />
+                      <a href={asset(item.src)} target="_blank" rel="noopener noreferrer" className="block">
+                        <img
+                          src={asset(item.src)}
+                          alt={item.alt}
+                          className="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.04]"
+                          width={800}
+                          height={800}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </a>
                     </figure>
                   ))}
                 </div>
@@ -363,18 +474,18 @@ export default function App() {
             </div>
 
             <div className="mt-12 grid gap-4 sm:grid-cols-3">
-              <div className="flex min-h-[140px] flex-col items-center justify-center rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+              <div className="flex min-h-[140px] flex-col items-center justify-center rounded-2xl border border-black/10 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand/20 hover:shadow-md">
                 <div className="text-3xl font-black tracking-tight text-[#1e4d8b]">TATA</div>
                 <p className="mt-2 text-center text-xs text-muted">स्टील व साहित्य — टाटा</p>
               </div>
-              <div className="flex min-h-[140px] flex-col items-center justify-center rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+              <div className="flex min-h-[140px] flex-col items-center justify-center rounded-2xl border border-black/10 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand/20 hover:shadow-md">
                 <div className="flex items-center gap-1 text-2xl font-black tracking-tight text-zinc-900">
                   <span className="text-brand">+</span>
                   ESSAR
                 </div>
                 <p className="mt-2 text-center text-xs text-muted">ESSAR स्टील परिवार</p>
               </div>
-              <div className="flex min-h-[140px] flex-col items-center justify-center rounded-2xl border border-black/10 bg-gradient-to-br from-zinc-800 to-zinc-950 p-6 text-white shadow-sm">
+              <div className="flex min-h-[140px] flex-col items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-zinc-800 to-zinc-950 p-6 text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg">
                 <div className="text-center text-lg font-bold leading-tight">
                   SteelWork
                   <span className="block text-xs font-medium text-zinc-300">Fabrication</span>
@@ -452,8 +563,18 @@ export default function App() {
               </ul>
             </div>
           </div>
-          <p className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-zinc-500">
-            © {new Date().getFullYear()} पांडुरंग स्टिल चैनलिंक (जाळी) इंडस्ट्रीज. सर्व हक्क राखीव.
+          <p className="mt-10 border-t border-white/10 pt-6 text-center text-[0.7rem] leading-relaxed text-zinc-500">
+            काही HD प्रात्यक्षिक छायाचित्रे{' '}
+            <a
+              href="https://www.pexels.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-400 underline decoration-zinc-600 underline-offset-2 hover:text-zinc-300"
+            >
+              Pexels
+            </a>{' '}
+            वरून — मोफत वापरास अनुकूल. © {new Date().getFullYear()} पांडुरंग स्टिल चैनलिंक (जाळी)
+            इंडस्ट्रीज. सर्व हक्क राखीव.
           </p>
         </div>
       </footer>
