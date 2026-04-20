@@ -466,15 +466,6 @@ export default function App() {
                       </a>
                       <figcaption className="border-t border-black/10 bg-zinc-950/95 px-4 py-3 text-center text-xs text-zinc-300">
                         <span className="font-medium text-white">{item.caption}</span>
-                        <a
-                          href={item.src}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-2 inline-flex items-center justify-center gap-1 text-[0.65rem] font-semibold text-brand hover:text-white"
-                        >
-                          <ExternalLink className="size-3" aria-hidden />
-                          फोटो नवीन टॅबमध्ये उघडा
-                        </a>
                         <p className="mt-2 text-[0.65rem] text-zinc-500">
                           दर व मोजमापासाठी फोन / WhatsApp करा.
                         </p>
