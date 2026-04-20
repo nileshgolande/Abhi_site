@@ -23,7 +23,7 @@ const CHAINLINK_GALLERY = [
   {
     key: 'rolls-yard',
     src: asset('assets/chainlink-rolls-yard.png'),
-    alt: 'गॅल्वनाइज्ड चैनलिंक जाळीचे मोठे रोल — स्टॉक व स्टील मेश',
+    alt: 'गॅल्वनाइज्ड चैनलिंक जाळीचे रोल — आवारात पॅलेटवर व्यवस्थित साठा',
     caption: 'चैनलिंक जाळीचे रोल',
     fit: 'cover' as const,
   },
@@ -37,8 +37,29 @@ const CHAINLINK_GALLERY = [
   {
     key: 'rolls-close',
     src: asset('assets/chainlink-rolls-close.png'),
-    alt: 'चैनलिंक जाळीचे रोल — जवळून मेश पॅटर्न',
+    alt: 'चैनलिंक जाळीचा रोल — जवळून डायमंड मेश व तारेचा नमुना',
     caption: 'जाळी — जवळून',
+    fit: 'cover' as const,
+  },
+  {
+    key: 'fencing-stock-a',
+    src: asset('assets/chainlink-fencing-1.png'),
+    alt: 'चैनलिंक फेन्सिंग — गॅल्वनाइज्ड जाळीचे रोल व तयार साठा',
+    caption: 'चैनलिंक फेन्सिंग — साठा',
+    fit: 'cover' as const,
+  },
+  {
+    key: 'fencing-mesh-roll',
+    src: asset('assets/chainlink-fencing-2.png'),
+    alt: 'साखळी जाळी — मजबूत स्टील मेश व रोल',
+    caption: 'जाळी — रोल व मेश',
+    fit: 'cover' as const,
+  },
+  {
+    key: 'fencing-yard-wide',
+    src: asset('assets/chainlink-fencing-3.png'),
+    alt: 'चैनलिंक जाळी — आवारात व्यापक साठा व पुरवठा',
+    caption: 'फेन्सिंग — तयार स्टॉक',
     fit: 'cover' as const,
   },
 ] as const
@@ -86,7 +107,7 @@ export default function App() {
   ]
 
   return (
-    <div className="min-h-svh bg-white text-ink font-marathi">
+    <div className="min-h-svh overflow-x-clip bg-white text-ink font-marathi">
       <a
         href="#main"
         className="absolute left-[-9999px] top-0 z-[100] whitespace-nowrap rounded-lg bg-brand px-4 py-2 text-white focus:left-4 focus:top-4"
@@ -100,7 +121,7 @@ export default function App() {
             <p className="text-[0.65rem] font-medium tracking-wide text-amber-700 sm:text-xs">
               !! गजानन महाराज प्रसन्न !!
             </p>
-            <p className="truncate text-lg font-semibold leading-tight text-brand transition-colors group-hover:text-brand-dark sm:text-xl">
+            <p className="line-clamp-2 text-base font-semibold leading-tight text-brand transition-colors group-hover:text-brand-dark sm:text-lg sm:line-clamp-none md:text-xl">
               पांडुरंग स्टिल चैनलिंक (जाळी) इंडस्ट्रीज
             </p>
           </a>
@@ -129,7 +150,7 @@ export default function App() {
 
           <button
             type="button"
-            className="inline-flex rounded-xl border border-black/10 p-2 text-ink md:hidden"
+            className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-xl border border-black/10 p-2 text-ink md:hidden"
             onClick={() => setMenuOpen(true)}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
@@ -142,23 +163,26 @@ export default function App() {
         {menuOpen ? (
           <div
             id="mobile-menu"
-            className="fixed inset-0 z-[60] bg-white md:hidden"
+            className="fixed inset-0 z-[60] flex min-h-0 flex-col bg-white md:hidden"
             role="dialog"
             aria-modal="true"
             aria-label="मोबाइल मेनू"
           >
-            <div className="flex items-center justify-between border-b border-black/5 px-4 py-3">
+            <div className="flex shrink-0 items-center justify-between border-b border-black/5 px-4 pb-3 pt-[max(0.75rem,env(safe-area-inset-top,0px))]">
               <span className="font-semibold text-brand">मेनू</span>
               <button
                 type="button"
-                className="rounded-xl border border-black/10 p-2"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-black/10 p-2"
                 onClick={() => setMenuOpen(false)}
                 aria-label="मेनू बंद करा"
               >
                 <X className="size-6" />
               </button>
             </div>
-            <nav className="flex flex-col gap-1 p-4" aria-label="मोबाइल नेव्हिगेशन">
+            <nav
+              className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overscroll-y-contain p-4 pb-[max(1rem,env(safe-area-inset-bottom,0px))]"
+              aria-label="मोबाइल नेव्हिगेशन"
+            >
               {nav.map((item) => (
                 <a
                   key={item.href}
@@ -196,7 +220,7 @@ export default function App() {
             }}
             aria-hidden
           />
-          <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:py-24">
+          <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20 lg:py-24">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
               <div className="max-w-3xl space-y-6">
                 <span className="inline-flex items-center rounded-full bg-brand px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
@@ -213,16 +237,18 @@ export default function App() {
                 <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                   <a
                     href={`tel:+91${PHONE_PRIMARY}`}
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand px-6 py-4 text-base font-semibold text-white shadow-lg shadow-brand/25 transition hover:bg-brand-dark"
+                    className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-brand px-5 py-3.5 text-center text-base font-semibold text-white shadow-lg shadow-brand/25 transition hover:bg-brand-dark sm:w-auto sm:px-6 sm:py-4"
                   >
                     <Phone className="size-5 shrink-0" aria-hidden />
-                    आता कॉल करा — {PHONE_PRIMARY}
+                    <span className="text-balance">
+                      आता कॉल करा — <span className="whitespace-nowrap">{PHONE_PRIMARY}</span>
+                    </span>
                   </a>
                   <a
                     href={waHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-emerald-600/20 bg-emerald-50 px-6 py-4 text-base font-semibold text-emerald-900 transition hover:border-emerald-600/40"
+                    className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl border-2 border-emerald-600/20 bg-emerald-50 px-5 py-3.5 text-base font-semibold text-emerald-900 transition hover:border-emerald-600/40 sm:w-auto sm:px-6 sm:py-4"
                   >
                     <MessageCircle className="size-5 shrink-0" aria-hidden />
                     WhatsApp वर चौकशी
@@ -321,9 +347,12 @@ export default function App() {
                 <h3 className="text-center text-xl font-semibold text-ink sm:text-2xl">
                   चैनलिंक जाळी (साखळी जाळी)
                 </h3>
+                <p className="mt-1 text-center text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-brand/75 sm:text-xs">
+                  Chainlink fencing
+                </p>
                 <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-muted">
                   कम्पाउंड, शेती, प्लॉट, फार्म व इतर ठिकाणी बांधकामासाठी तयार स्टॉक. खालील उच्च
-                  दर्जाच्या प्रात्यक्षिक — चैनलिंक जाळी.
+                  दर्जाची प्रात्यक्षिके — सहा फोटो, चैनलिंक जाळी.
                 </p>
 
                 <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -464,7 +493,7 @@ export default function App() {
         </section>
       </main>
 
-      <footer className="border-t border-black/10 bg-zinc-950 py-12 text-zinc-200">
+      <footer className="border-t border-black/10 bg-zinc-950 py-12 pb-[max(3rem,calc(4.5rem+env(safe-area-inset-bottom,0px)))] text-zinc-200 sm:pb-12">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
             <div>
@@ -507,7 +536,7 @@ export default function App() {
         href={waHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-5 right-5 z-[70] flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-emerald-900/30 transition hover:scale-105 hover:shadow-xl"
+        className="fixed z-[70] flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-emerald-900/30 transition hover:scale-105 hover:shadow-xl max-sm:bottom-[max(1rem,env(safe-area-inset-bottom,0px))] max-sm:right-[max(1rem,env(safe-area-inset-right,0px))] sm:bottom-5 sm:right-5"
         aria-label="WhatsApp वर संदेश पाठवा"
       >
         <MessageCircle className="size-7" aria-hidden />
