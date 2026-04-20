@@ -14,33 +14,34 @@ const PHONE_PRIMARY = '7264949004'
 const PHONE_SECONDARY = '8380035106'
 const GST = '27CDYPJ0404Q1ZX'
 
-/** Pexels — उच्च रिझोल्यूशन JPEG (मोफत वापरासाठी उपलब्ध). */
-function pexelsHd(photoId: string, w: number) {
-  return `https://images.pexels.com/photos/${photoId}/pexels-photo-${photoId}.jpeg?auto=compress&cs=tinysrgb&w=${w}&q=90`
-}
-
-/** HD चैनलिंक जाळी — प्रात्यक्षिक छायाचित्रे */
-const CHAINLINK_GALLERY = [
-  {
-    id: '683402',
-    alt: 'चैनलिंक जाळी — जवळून, दिवसाच्या प्रकाशात (HD)',
-    caption: 'चैनलिंक जाळी — जवळून',
-  },
-  {
-    id: '951408',
-    alt: 'सायक्लोन / चैनलिंक जाळी — उच्च दर्जाचे HD छायाचित्र',
-    caption: 'सायक्लोन जाळी',
-  },
-  {
-    id: '1550131',
-    alt: 'चैनलिंक जाळी — मेश टेक्सचर (HD)',
-    caption: 'जाळी व मेश',
-  },
-] as const
-
 function asset(path: string) {
   return `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
 }
+
+/** चैनलिंक जाळी — उत्पादन फोटो (स्थानिक) */
+const CHAINLINK_GALLERY = [
+  {
+    key: 'rolls-yard',
+    src: asset('assets/chainlink-rolls-yard.png'),
+    alt: 'गॅल्वनाइज्ड चैनलिंक जाळीचे मोठे रोल — स्टॉक व स्टील मेश',
+    caption: 'चैनलिंक जाळीचे रोल',
+    fit: 'cover' as const,
+  },
+  {
+    key: 'mesh-white',
+    src: asset('assets/chainlink-mesh-white.png'),
+    alt: 'चैनलिंक जाळी — डायमंड मेश, उच्च दर्जाचे उत्पादन दृश्य',
+    caption: 'चैनलिंक मेश',
+    fit: 'contain' as const,
+  },
+  {
+    key: 'rolls-close',
+    src: asset('assets/chainlink-rolls-close.png'),
+    alt: 'चैनलिंक जाळीचे रोल — जवळून मेश पॅटर्न',
+    caption: 'जाळी — जवळून',
+    fit: 'cover' as const,
+  },
+] as const
 
 /** काटेरी तार — तुमचे उत्पादन फोटो (स्थानिक HD) */
 const BARBED_WIRE_GALLERY = [
@@ -310,8 +311,8 @@ export default function App() {
             <div className="mx-auto max-w-3xl text-center">
               <h2 className="text-3xl font-semibold text-brand sm:text-4xl">उत्पादने</h2>
               <p className="mt-3 text-pretty text-muted sm:text-lg">
-                चैनलिंक जाळी व काटेरी तार — तुमच्या गरजेनुसार मोजमाप व जाडी. चैनलिंक खालील उच्च
-                दर्जाच्या प्रात्यक्षिक प्रतिमा; काटेरी तार — आमचे उत्पादन फोटो.
+                चैनलिंक जाळी व काटेरी तार — तुमच्या गरजेनुसार मोजमाप व जाडी. खालील दोन्ही विभागात आमचे
+                उच्च दर्जाचे उत्पादन फोटो.
               </p>
             </div>
 
@@ -326,33 +327,31 @@ export default function App() {
                 </p>
 
                 <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {CHAINLINK_GALLERY.map((item) => {
-                    const src = pexelsHd(item.id, 1920)
-                    const srcSet = `${pexelsHd(item.id, 960)} 960w, ${pexelsHd(item.id, 1280)} 1280w, ${pexelsHd(item.id, 1920)} 1920w, ${pexelsHd(item.id, 2560)} 2560w`
-                    return (
-                      <figure
-                        key={item.id}
-                        className="group relative overflow-hidden rounded-2xl border border-black/10 bg-zinc-900 shadow-lg ring-1 ring-black/5"
-                      >
-                        <div className="block overflow-hidden">
-                          <img
-                            src={src}
-                            srcSet={srcSet}
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            alt={item.alt}
-                            className="aspect-[4/5] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
-                            width={1920}
-                            height={2400}
-                            loading="lazy"
-                            decoding="async"
-                          />
-                        </div>
-                        <figcaption className="border-t border-white/10 bg-zinc-950/90 px-3 py-2.5 text-center text-xs text-zinc-300">
-                          <span className="font-medium text-white">{item.caption}</span>
-                        </figcaption>
-                      </figure>
-                    )
-                  })}
+                  {CHAINLINK_GALLERY.map((item) => (
+                    <figure
+                      key={item.key}
+                      className="group overflow-hidden rounded-2xl border border-black/10 bg-white shadow-lg ring-1 ring-black/5"
+                    >
+                      <div className="block overflow-hidden bg-zinc-50">
+                        <img
+                          src={item.src}
+                          alt={item.alt}
+                          className={`aspect-[4/5] w-full transition duration-700 ease-out group-hover:scale-[1.03] ${
+                            item.fit === 'contain'
+                              ? 'object-contain object-center p-3 sm:p-5'
+                              : 'object-cover object-center'
+                          }`}
+                          width={1600}
+                          height={2000}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                      <figcaption className="border-t border-black/10 bg-zinc-950/95 px-3 py-2.5 text-center text-xs text-zinc-300">
+                        <span className="font-medium text-white">{item.caption}</span>
+                      </figcaption>
+                    </figure>
+                  ))}
                 </div>
               </div>
 
