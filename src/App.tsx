@@ -36,14 +36,14 @@ const CHAINLINK_GALLERY = [
   },
   {
     key: 'rolls-close',
-    src: asset('assets/chainlink-rolls-close.png'),
+    src: asset('assets/barbed-wire-strands.png'),
     alt: 'चैनलिंक जाळीचा रोल — गॅल्वनाइज्ड स्टील मेश',
     caption: 'जाळी — जवळून',
     fit: 'cover' as const,
   },
   {
     key: 'fencing-stock-a',
-    src: asset('assets/chainlink-fencing-1.png'),
+    src: asset('assets/chainlink-fencing-3.png'),
     alt: 'चैनलिंक फेन्सिंग — मोठा साठा व तयार रोल',
     caption: 'फेन्सिंग — मोठा साठा',
     fit: 'cover' as const,
@@ -57,7 +57,7 @@ const CHAINLINK_GALLERY = [
   },
   {
     key: 'fencing-yard-wide',
-    src: asset('assets/chainlink-fencing-3.png'),
+    src: asset('assets/chainlink-fencing-2.png'),
     alt: 'चैनलिंक जाळी — स्टॉक व पुरवठा',
     caption: 'फेन्सिंग — तयार स्टॉक',
     fit: 'cover' as const,
@@ -337,8 +337,7 @@ export default function App() {
             <div className="mx-auto max-w-3xl text-center">
               <h2 className="text-3xl font-semibold text-brand sm:text-4xl">उत्पादने</h2>
               <p className="mt-3 text-pretty text-muted sm:text-lg">
-                चैनलिंक जाळी व काटेरी तार — तुमच्या गरजेनुसार मोजमाप व जाडी. खालील दोन्ही विभागात ताजे,
-                उच्च दर्जाचे HD प्रात्यक्षिक.
+                चैनलिंक जाळी व काटेरी तार — तुमच्या गरजेनुसार मोजमाप व जाडी. 
               </p>
             </div>
 
@@ -351,8 +350,7 @@ export default function App() {
                   Chainlink fencing
                 </p>
                 <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-muted">
-                  कम्पाउंड, शेती, प्लॉट, फार्म व इतर ठिकाणी बांधकामासाठी तयार स्टॉक. खालील सहा HD
-                  प्रात्यक्षिके — चैनलिंक जाळी.
+                  कम्पाउंड, शेती, प्लॉट, फार्म व इतर ठिकाणी बांधकामासाठी तयार स्टॉक - चैनलिंक जाळी.
                 </p>
 
                 <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
