@@ -18,7 +18,7 @@ function asset(path: string) {
   return `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
 }
 
-/** चैनलिंक जाळी — फोटो `public/assets/chainlink-*.png` मध्ये */
+/** चैनलिंक जाळी — `chainlink-rolls-*.png`, `chainlink-fencing*.png` */
 const CHAINLINK_GALLERY = [
   {
     key: 'rolls-yard',
@@ -28,10 +28,10 @@ const CHAINLINK_GALLERY = [
     fit: 'cover' as const,
   },
   {
-    key: 'mesh-white',
-    src: asset('assets/chainlink-mesh-white.png'),
-    alt: 'चैनलिंक जाळी — डायमंड मेश, जवळून तपशील',
-    caption: 'चैनलिंक मेश',
+    key: 'fencing-mesh',
+    src: asset('assets/chainlink-fencing.png'),
+    alt: 'चैनलिंक फेन्सिंग — डायमंड मेश, जवळून तपशील',
+    caption: 'चैनलिंक फेन्सिंग — मेश',
     fit: 'contain' as const,
   },
   {
@@ -42,41 +42,34 @@ const CHAINLINK_GALLERY = [
     fit: 'cover' as const,
   },
   {
-    key: 'fencing-stock-a',
+    key: 'fencing-stock',
     src: asset('assets/chainlink-fencing-3.png'),
     alt: 'चैनलिंक फेन्सिंग — मोठा साठा व तयार रोल',
     caption: 'फेन्सिंग — मोठा साठा',
     fit: 'cover' as const,
   },
   {
-    key: 'fencing-mesh-roll',
+    key: 'fencing-install',
     src: asset('assets/chainlink-fencing-2.png'),
-    alt: 'साखळी जाळी — बांधकामासाठी तयार मेश व रोल',
+    alt: 'साखळी जाळी — बांधकामासाठी तयार फेन्सिंग व मेश',
     caption: 'जाळी — रोल व मेश',
-    fit: 'cover' as const,
-  },
-  {
-    key: 'fencing-yard-wide',
-    src: asset('assets/chainlink-fencing-2.png'),
-    alt: 'चैनलिंक जाळी — स्टॉक व पुरवठा',
-    caption: 'फेन्सिंग — तयार स्टॉक',
     fit: 'cover' as const,
   },
 ] as const
 
-/** काटेरी तार — तुमचे उत्पादन फोटो (स्थानिक HD) */
+/** काटेरी तार — `barbed-wire.png` (जवळून), `barbed-wire-roll.png` (रोल) */
 const BARBED_WIRE_GALLERY = [
   {
     key: 'strands',
-    src: asset('assets/barbed-wire-strands.png'),
-    alt: 'काटेरी तार — तीन ओळी, गॅल्वनाइज्ड स्टील, पांडुरंग स्टिल',
+    src: asset('assets/barbed-wire.png'),
+    alt: 'काटेरी तार — गॅल्वनाइज्ड स्टील, जवळून तपशील',
     caption: 'काटेरी तार — जवळून',
     fit: 'contain' as const,
   },
   {
     key: 'roll',
     src: asset('assets/barbed-wire-roll.png'),
-    alt: 'काटेरी तारचा रोल — उच्च दर्जाची गॅल्वनाइज्ड बार्ब्ड वायर',
+    alt: 'काटेरी तारचा रोल — गॅल्वनाइज्ड बार्ब्ड वायर',
     caption: 'काटेरी तार — रोल',
     fit: 'contain' as const,
   },
@@ -350,7 +343,8 @@ export default function App() {
                   Chainlink fencing
                 </p>
                 <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-muted">
-                  कम्पाउंड, शेती, प्लॉट, फार्म व इतर ठिकाणी बांधकामासाठी तयार स्टॉक - चैनलिंक जाळी.
+                  कम्पाउंड, शेती, प्लॉट, फार्म व इतर ठिकाणी बांधकामासाठी तयार स्टॉक. खालील पाच फोटो —
+                  चैनलिंक फेन्सिंग व जाळी.
                 </p>
 
                 <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
